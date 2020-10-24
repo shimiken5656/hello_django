@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from .models import Friend
-from .forms import HelloForm
+#from .forms import HelloForm
 from .forms import FindForm
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -12,7 +13,7 @@ from .forms import FriendForm, MessageForm
 
 def index(request, num=1):
     data = Friend.objects.all()
-    page = Paginator(data,3)
+    page = Paginator(data,10)
     params = {
         'title': 'Hello',
         'message': '',
@@ -20,6 +21,19 @@ def index(request, num=1):
     }
     return render(request, 'hello/index.html', params)
 
+
+# create model
+def create(request):
+    if (request.method == 'POST'):
+        obj = Friend()
+        friend = FriendForm(request.POST, instance=obj)
+        friend.save()
+        return redirect(to='/hello')
+    params = {
+        'title': 'Create',
+        'form':FriendForm(),
+    }
+    return render(request,'hello/create.html',params)
 
 def index2(request):
     data = Friend.objects.all()
@@ -45,7 +59,7 @@ def find(request):
         form = FindForm()
         data = Friend.objects.all()
     params = {
-        'title': 'Hello',
+        'title': 'Find',
         'message': msg,
         'form': form,
         'data': data,
