@@ -35,6 +35,20 @@ def create(request):
     }
     return render(request,'hello/create.html',params)
 
+# edit model
+def edit(request, num):
+    obj = Friend.objects.get(id=num)
+    if (request.method == 'POST'):
+        friend = FriendForm(request.POST, instance=obj)
+        friend.save()
+        return redirect(to='/hello')
+    params = {
+        'title': 'Edit',
+        'id': num,
+        'form':FriendForm(instance=obj),
+    }
+    return render(request,'hello/edit.html',params)
+
 def index2(request):
     data = Friend.objects.all()
     params = {
