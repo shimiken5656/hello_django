@@ -11,6 +11,8 @@
 
 <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
+    <a class="page-link" href="./create">新規作成</a>
+    <a class="page-link" href="./find">検索</a>
     <p class="h5 mt-4">{{message|safe}}</p>
     <form action="{% url 'index' %}" method="post">
         {% csrf_token %}
