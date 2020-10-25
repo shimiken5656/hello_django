@@ -49,6 +49,19 @@ def edit(request, num):
     }
     return render(request,'hello/edit.html',params)
 
+# delete
+def delete(request, num):
+    friend = Friend.objects.get(id=num)
+    if (request.method == 'POST'):
+        friend.delete()
+        return redirect(to='/hello')
+    params = {
+        'title': 'Delete',
+        'id': num,
+        'obj':friend,
+    }
+    return render(request,'hello/delete.html',params)
+
 def index2(request):
     data = Friend.objects.all()
     params = {

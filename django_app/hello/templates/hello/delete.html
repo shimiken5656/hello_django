@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <h1 class="display-4 text-primary">{{title}}</h1>
+    <table class="table">
+        <form action="{% url 'delete' id %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Birh</th>
+            </tr>
+            <tr>
+                <td>{{obj.id}}</td>
+                <td>{{obj.name}}</td>
+                <td>{% if obj.gender == False %}男性{% endif %}
+                    {% if obj.gender == True %}女性{% endif %}
+                </td>
+                <td>{{obj.mail}}</td>
+                <td>{{obj.age}}</td>
+                <td>{{obj.birthday}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-primary">
+                </td>
+            </tr>
+        </form>
+    </table>
+</body>
