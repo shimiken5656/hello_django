@@ -28,6 +28,7 @@
             <th>AGE</th>
             <th>BIRTHDAY</th>
             <th>ユーザー編集</th>
+            <th>ユーザー削除</th>
         </tr>
         {% for item in data %}
         <tr>
@@ -40,6 +41,7 @@
             <td>{{ item.age }}</td>
             <td>{{ item.birthday }}</td>
             <td><a href="{% url 'edit' item.id %}">Edit</a></td>
+            <td><a href="{% url 'delete' item.id %}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>
